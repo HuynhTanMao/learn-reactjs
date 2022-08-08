@@ -26,8 +26,12 @@ function ColorBox(props) {
                     <li>Giữ màu của background khi click lên box sau khi reload trình duyệt</li>
                 </ol>
             </div>
-            <div className='color-box' style={{ backgroundColor: color }} onClick={handleChangeBgOnClick}>
-            </div >
+            <div
+                className='color-box'
+                style={{ backgroundColor: color }}
+                onClick={handleChangeBgOnClick}
+            >
+            </div>
             <div className='analysis'>
                 <h2>Phân tích</h2>
                 <div>
