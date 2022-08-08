@@ -8,8 +8,11 @@ function getRandomColor() {
 }
 
 function ColorBox(props) {
-    const initColor = localStorage.getItem('defaultColor') || 'deeppink';
-    const [color, setColor] = useState(initColor);
+
+    const [color, setColor] = useState(() => {
+        const initColor = localStorage.getItem('defaultColor') || 'deeppink';
+        return initColor;
+    });
 
     const handleChangeBgOnClick = () => {
         const newColor = getRandomColor();
