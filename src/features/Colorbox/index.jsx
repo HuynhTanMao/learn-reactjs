@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
 import './style.sass';
 
+function getRandomColor() {
+    const COLOR_LIST = ['deeppink', 'green', 'yellow', 'black', 'blue'];
+    let randomColor = Math.floor(Math.random() * COLOR_LIST.length); // random 0 - argsColor.length;
+    return COLOR_LIST[randomColor];
+}
+
 function ColorBox(props) {
-    const [color, setColor] = useState(() => {
-        let defaultColor = 'deeppink';
-        if (localStorage.getItem('defaultColor')) {
-            defaultColor = localStorage.getItem('defaultColor');
-        }
-        return defaultColor;
-    });
+    const initColor = localStorage.getItem('defaultColor') || 'deeppink';
+    const [color, setColor] = useState(initColor);
 
     const handleChangeBgOnClick = () => {
-        const argsColor = ['deeppink', 'green', 'yellow', 'black', 'blue'];
-        let randomColor = Math.floor(Math.random() * argsColor.length); // random 0 - argsColor.length;
-        localStorage.setItem('defaultColor', argsColor[randomColor]);
-        setColor(argsColor[randomColor]);
+        const newColor = getRandomColor();
+        localStorage.setItem('defaultColor', newColor);
+        setColor(newColor);
     }
 
     return (
         <div className='container'>
             <h1>Random background color when click Box</h1>
-            <div class="desc">
+            <div className="desc">
                 <ol>
                     <li>Khi click lên box, đổi màu bg ngẫu nhiêu thành 1 màu trong các mảng ['deeppink', 'green', 'yellow', 'black', 'blue']</li>
                     <li>Giữ màu của background khi click lên box sau khi reload trình duyệt</li>
