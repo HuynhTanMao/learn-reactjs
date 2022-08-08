@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import TodoFeature from "./features/Todo";
+import React from "react";
+import ColorBox from "./features/Colorbox";
+
 function App() {
   return (
     <div className="App">
-      <TodoFeature />
+      <ColorBox />
     </div>
   );
 }

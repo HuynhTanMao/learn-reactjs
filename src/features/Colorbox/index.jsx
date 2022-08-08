@@ -1,20 +1,28 @@
-import { useState } from "react";
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import './style.sass';
 
-Colorbox.propTypes = {
-    color: PropTypes.string
-};
+function ColorBox(props) {
+    const [color, setColor] = useState(() => {
+        let defaultColor = 'deeppink';
+        if (localStorage.getItem('defaultColor')) {
+            defaultColor = localStorage.getItem('defaultColor');
+        }
+        return defaultColor;
+    });
 
-function Colorbox(){
-    const [ color, setColor ] = useState('White');
+    const handleChangeBgOnClick = () => {
+        const argsColor = ['deeppink', 'green', 'yellow', 'black', 'blue'];
+        let randomColor = Math.floor(Math.random() * argsColor.length); // random 0 - argsColor.length;
+        localStorage.setItem('defaultColor', argsColor[randomColor]);
+        setColor(argsColor[randomColor]);
+    }
+
     return (
-        <div className="container">
-            <h1>My favorite color is {color}!</h1>
-            <button type="button" onClick={() => setColor("red")}>Red</button>
-            <button type="button" onClick={() => setColor("blue")}>Blue</button>
+        <div className='container'>
+            <div className='color-box' style={{ backgroundColor: color }} onClick={handleChangeBgOnClick}>
+            </div >
         </div>
     );
-};
+}
 
-export default Colorbox;
+export default ColorBox;
