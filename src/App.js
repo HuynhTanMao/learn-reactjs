@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TodoForm from "./features/TodoForm";
 import TodoList from "./features/TodoList";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       { id: 3, title: 'They love Frontend! 🚀' }
     ]
   );
+
   const HandleTodoClick = (index, todo) => {
     if (index < 0) return;
     let newTodoList = [...todoList];
@@ -16,9 +18,19 @@ function App() {
     setTodoList(newTodoList);
   };
 
+  const HandleOnFormSubmit = (newTodo) => {
+    console.log(newTodo);
+    let newTodoList = [...todoList, {
+      id: (todoList.length + 1),
+      title: newTodo
+    }];
+    setTodoList(newTodoList);
+  };
+
   return (
     <div className="App">
       <TodoList todos={todoList} onTodoClick={HandleTodoClick} />
+      <TodoForm onSubmit={HandleOnFormSubmit} />
     </div>
   );
 }
