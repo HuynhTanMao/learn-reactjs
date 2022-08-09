@@ -18,12 +18,12 @@ function App() {
     setTodoList(newTodoList);
   };
 
-  const HandleOnFormSubmit = (newTodo) => {
-    console.log(newTodo);
-    let newTodoList = [...todoList, {
-      id: (todoList.length + 1),
-      title: newTodo
-    }];
+  const HandleOnFormSubmit = (formValues) => {
+    const newTodo = {
+      id: todoList.length + 1,
+      ...formValues
+    };
+    let newTodoList = [...todoList, newTodo];
     setTodoList(newTodoList);
   };
 

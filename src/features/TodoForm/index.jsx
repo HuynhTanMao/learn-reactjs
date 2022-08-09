@@ -11,21 +11,28 @@ TodoForm.defaultProps = {
 
 function TodoForm(props) {
     const { onSubmit } = props;
+    const [value, setValue] = useState('');
 
-    const handleOnSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        let newTodo = document.getElementById("newTodo");
         if (onSubmit) {
-            onSubmit(newTodo.value);
+            const newFormValues = {
+                title: value
+            };
+            onSubmit(newFormValues);
         }
-        newTodo.value = '';
+        setValue('');
+    };
+
+    const handleValueChange = (e) => {
+        setValue(e.target.value);
     };
 
     return (
         <div className='container'>
             <h3>Add new todolist</h3>
-            <form id="addNewToDo" action="" onSubmit={(e) => handleOnSubmit(e)}>
-                <input type="text" name='newTodo' id='newTodo' />
+            <form id="addNewToDo" action="" onSubmit={handleSubmit}>
+                <input type="text" name='newTodo' id='newTodo' value={value} onChange={handleValueChange} />
                 <input type="submit" value="Submit" />
             </form>
         </div >
