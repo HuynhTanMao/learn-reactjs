@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './style.sass';
 
 PostList.propTypes = {
     posts: PropTypes.array,
@@ -12,8 +13,7 @@ PostList.defaultProps = {
 function PostList(props) {
     const { posts } = props;
     return (
-        <div className='container'>
-            <h1>React hook - PostList</h1>
+        <div>
             <ul>
                 {posts.map(post => (
                     <li key={post.id}>{post.title}</li>

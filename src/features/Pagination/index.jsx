@@ -22,7 +22,7 @@ function Pagination(props) {
     }
 
     return (
-        <div className='container'>
+        <div>
             <button
                 disabled={_page <= 1}
                 onClick={() => { handlePageChange(_page - 1) }}

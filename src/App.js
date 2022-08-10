@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as queryString from "query-string";
+import PostFiltersForm from "./features/PostFiltersForm";
 import Pagination from "./features/Pagination";
 import PostList from "./features/PostList";
 import TodoForm from "./features/TodoForm";
@@ -51,6 +52,14 @@ function App() {
     });
   }
 
+  const HandleFiltersChange = (newFilters) => {
+    setFilters({
+      ...filters,
+      _page: 1,
+      title_like: newFilters.searchTerm
+    })
+  }
+
   const HandleTodoClick = (index, todo) => {
     if (index < 0) return;
     let newTodoList = [...todoList];
@@ -71,8 +80,12 @@ function App() {
     <div className="App">
       {/* <TodoList todos={todoList} onTodoClick={HandleTodoClick} />
       <TodoForm onSubmit={HandleOnFormSubmit} /> */}
-      <PostList posts={postList} />
-      <Pagination pagination={pagination} onPageChange={HandleOnPageChange} />
+      <div className="container">
+        <h1>React hook - PostList</h1>
+        <PostFiltersForm onSubmit={HandleFiltersChange} />
+        <PostList posts={postList} />
+        <Pagination pagination={pagination} onPageChange={HandleOnPageChange} />
+      </div>
     </div>
   );
 }
