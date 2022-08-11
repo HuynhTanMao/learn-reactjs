@@ -6,6 +6,7 @@ import PostList from "./features/PostList";
 import TodoForm from "./features/TodoForm";
 import TodoList from "./features/TodoList";
 import Clock from "./features/Clock";
+import BetterClock from "./features/BetterClock";
 
 function App() {
   const [todoList, setTodoList] = useState(
@@ -92,6 +93,9 @@ function App() {
 
         <button onClick={() => { setShowClock(false) }} >Hide Clock</button>
         <button onClick={() => { setShowClock(true) }} >Show Clock</button>
+
+        <h2> Better Clock </h2>
+        <BetterClock />
       </div>
     </div>
   );
