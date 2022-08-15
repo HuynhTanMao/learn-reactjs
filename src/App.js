@@ -7,6 +7,7 @@ import TodoForm from "./features/TodoForm";
 import TodoList from "./features/TodoList";
 import Clock from "./features/Clock";
 import BetterClock from "./features/BetterClock";
+import MagicBox from "./features/MagicBox";
 
 function App() {
   const [todoList, setTodoList] = useState(
@@ -85,17 +86,20 @@ function App() {
       {/* <TodoList todos={todoList} onTodoClick={HandleTodoClick} />
       <TodoForm onSubmit={HandleOnFormSubmit} /> */}
       <div className="container">
-        <h1>React hook - useEffect - clean up</h1>
+        <h1>React custom hook - <br /> Magicbox random color after 1 second</h1>
         {/* <PostFiltersForm onSubmit={HandleFiltersChange} />
         <PostList posts={postList} />
         <Pagination pagination={pagination} onPageChange={HandleOnPageChange} /> */}
-        {showClock && <Clock />}
+        {/* {showClock && <Clock />} */}
 
-        <button onClick={() => { setShowClock(false) }} >Hide Clock</button>
+        {/* <button onClick={() => { setShowClock(false) }} >Hide Clock</button>
         <button onClick={() => { setShowClock(true) }} >Show Clock</button>
 
         <h2> Better Clock </h2>
-        <BetterClock />
+        <BetterClock /> */}
+
+        <MagicBox />
+
       </div>
     </div>
   );
