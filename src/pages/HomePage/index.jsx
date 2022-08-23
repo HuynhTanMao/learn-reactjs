@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import * as queryString from "query-string";
-import PostFiltersForm from "./features/PostFiltersForm";
-import Pagination from "./features/Pagination";
-import PostList from "./features/PostList";
-import TodoForm from "./features/TodoForm";
-import TodoList from "./features/TodoList";
-import Clock from "./features/Clock";
-import BetterClock from "./features/BetterClock";
-import MagicBox from "./features/MagicBox";
+// import PostFiltersForm from "././features/PostFiltersForm";
+// import Pagination from "././features/Pagination";
+// import PostList from "././features/PostList";
+import TodoForm from "../../features/TodoForm";
+import TodoList from "../../features/TodoList";
+// import Clock from "././features/Clock";
+// import BetterClock from "././features/BetterClock";
+// import MagicBox from "../features/MagicBox";
 
 function HomePage() {
     const [todoList, setTodoList] = useState(
@@ -31,25 +31,25 @@ function HomePage() {
 
     const [showClock, setShowClock] = useState(true);
 
-    useEffect(() => {
-        console.log("re call useeffect");
-        async function fetchPostList() {
-            try {
-                const paramsString = queryString.stringify(filters);
-                const requestUrl = `http://js-post-api.herokuapp.com/api/posts?${paramsString}`;
-                const response = await fetch(requestUrl);
-                const responseJSON = await response.json();
-                const { data, pagination } = responseJSON;
-                console.log(responseJSON);
-                setPostList(data);
-                setPagination(pagination);
+    // useEffect(() => {
+    //     console.log("re call useeffect");
+    //     async function fetchPostList() {
+    //         try {
+    //             const paramsString = queryString.stringify(filters);
+    //             const requestUrl = `http://js-post-api.herokuapp.com/api/posts?${paramsString}`;
+    //             const response = await fetch(requestUrl);
+    //             const responseJSON = await response.json();
+    //             const { data, pagination } = responseJSON;
+    //             console.log(responseJSON);
+    //             setPostList(data);
+    //             setPagination(pagination);
 
-            } catch (error) {
-                console.log("Failed to fetch post list:", error.message);
-            }
-        }
-        fetchPostList();
-    }, [filters]);
+    //         } catch (error) {
+    //             console.log("Failed to fetch post list:", error.message);
+    //         }
+    //     }
+    //     fetchPostList();
+    // }, [filters]);
 
     const HandleOnPageChange = (page) => {
         setFilters({
@@ -84,10 +84,10 @@ function HomePage() {
 
     return (
         <div className="App">
-            {/* <TodoList todos={todoList} onTodoClick={HandleTodoClick} />
-      <TodoForm onSubmit={HandleOnFormSubmit} /> */}
+            <TodoList todos={todoList} onTodoClick={HandleTodoClick} />
+            <TodoForm onSubmit={HandleOnFormSubmit} />
             <div className="container">
-                <h1>React custom hook - <br /> Magicbox random color after 1 second</h1>
+                {/* <h1>React custom hook - <br /> Magicbox random color after 1 second</h1> */}
                 {/* <PostFiltersForm onSubmit={HandleFiltersChange} />
         <PostList posts={postList} />
         <Pagination pagination={pagination} onPageChange={HandleOnPageChange} /> */}
@@ -99,7 +99,7 @@ function HomePage() {
         <h2> Better Clock </h2>
         <BetterClock /> */}
 
-                <MagicBox />
+                {/* <MagicBox /> */}
 
             </div>
         </div>

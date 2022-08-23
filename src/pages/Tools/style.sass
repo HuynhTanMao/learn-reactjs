@@ -1,0 +1,41 @@
+img
+    max-width: 100%
+ul
+    li
+        a.active
+            color: green
+            font-weight: bold
+
+.tools-grid
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin: 40px auto;
+    grid-gap: 30px;     
+    
+    .tool-item
+        .tool-item-inner
+            text-decoration: none
+            img
+                border-radius: 20px   
+            h3
+                margin: 0
+                text-align: center
+                font-size: 14px
+                font-weight: bold                
+
+.tool-wrap
+    display: flex
+    align-items: stretch
+    margin: 40px auto
+    .sidebar
+        display: block
+        overflow: hidden
+        flex-shrink: 0
+
+        max-width: 200px
+        width: 100%
+        margin-right: 60px
+        border-right: 1px solid #ddd;       
+    .main
+        flex: 1    
+            

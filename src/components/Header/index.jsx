@@ -1,16 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { NavLink } from "react-router-dom";
 import './style.sass';
 
-Header.propTypes = {
-    
-};
-
-function Header(props) {
+function Header() {
     return (
-        <div>
-            Header
-        </div>
+        <header>
+            <strong>Header</strong>
+            < nav className='header-nav' >
+                <NavLink to="/">Home</NavLink> | {" "}
+                <NavLink to="/todos" > Todos</NavLink > | {" "}
+                <NavLink to="/news" >Post List</NavLink > | {" "}
+                <NavLink to="/tools">Tools</NavLink>
+            </nav >
+        </header>
     );
 }
 

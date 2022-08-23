@@ -5,7 +5,7 @@ function Clock() {
     const { timeString } = useClock();
     return (
         <div>
-            <p style={{ fontSize: '42px' }}>{timeString}</p>
+            <span style={{ fontSize: '42px' }}>{timeString}</span>
         </div>
     );
 }
