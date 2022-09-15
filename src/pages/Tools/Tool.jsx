@@ -3,6 +3,7 @@ import { NavLink, useParams, useMatch } from "react-router-dom";
 import BetterClock from "../../features/BetterClock";
 import Clock from "../../features/Clock";
 import MagicBox from "../../features/MagicBox";
+import CounterFeature from "../../features/Counter";
 import './style.sass';
 
 function Tool() {
@@ -16,6 +17,7 @@ function Tool() {
                 <ul>
                     <li><NavLink to="../clock">Clock</NavLink></li>
                     <li><NavLink to="../magic-color">Magic box</NavLink></li>
+                    <li><NavLink to="../counter">Counter</NavLink></li>
                 </ul>
             </div>
             <div className="main">
@@ -34,6 +36,7 @@ function Tool() {
                     </div>
                 }
                 {toolSlug === 'magic-color' && <MagicBox />}
+                {toolSlug === 'counter' && <CounterFeature />}
             </div>
         </div >
     );

@@ -31,7 +31,7 @@ function News() {
                 const response = await fetch(requestUrl);
                 const responseJSON = await response.json();
                 const { data, pagination } = responseJSON;
-                console.log(responseJSON);
+                // console.log(responseJSON);
                 setPostList(data);
                 setPagination(pagination);
 
