@@ -12,8 +12,13 @@ const userApi = {
         return axiosClient.get(url);
     },
 
-    add(id, data) {
-        const url = '/users';
+    add(data) {
+        const url = '/auth/local/register';
+        return axiosClient.post(url, { data });
+    },
+
+    register(data) {
+        const url = '/auth/local/register';
         return axiosClient.post(url, { data });
     },
 

@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Container } from "@mui/material";
+import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 import productApi from './api/productApi.js';
-import Header from './components/Header';
+import './App.css';
 import Footer from './components/Footer';
+import Header from './components/Header';
 import NoMatch from './components/NoMatch';
-import Todos from './pages/Todos';
 import News from './pages/News';
+import Todos from './pages/Todos';
 import Tools from './pages/Tools';
 import Tool from './pages/Tools/Tool.jsx';
-import './App.css';
 
 function App() {
 
@@ -28,7 +29,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="container">
+      <Container fixed>
         {<Header />}
         <div className="page-wrap">
           <Routes>
@@ -43,7 +44,7 @@ function App() {
           </Routes>
         </div>
         {<Footer />}
-      </div>
+      </Container>
     </div>
   );
 }
