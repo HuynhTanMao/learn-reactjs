@@ -23,7 +23,6 @@ function News() {
     });
 
     useEffect(() => {
-        console.log("re call useeffect");
         async function fetchPostList() {
             try {
                 const paramsString = queryString.stringify(filters);

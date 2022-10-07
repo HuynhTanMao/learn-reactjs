@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
+import productApi from "api/productApi";
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import productApi from './api/productApi.js';
 import './App.css';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -25,7 +25,6 @@ function App() {
     fetchProducts();
 
   }, []);
-
 
   return (
     <div className="App">

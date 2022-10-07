@@ -1,5 +1,5 @@
 import CodeIcon from '@mui/icons-material/Code';
-import { Typography } from '@mui/material';
+import { IconButton, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -13,10 +13,18 @@ import DialogTitle from '@mui/material/DialogTitle';
 import './style.sass';
 import { useState } from 'react';
 import Register from 'features/Auth/Register';
+import { AddBox, Close } from '@mui/icons-material';
+import Login from 'features/Auth/Login';
 
+const MODE = {
+    'LOGIN': 'login',
+    'REGISTER': 'register'
+}
 
 export default function Header() {
     const [open, setOpen] = useState(false);
+
+    const [mode, setMode] = useState(MODE.REGISTER);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -55,14 +63,29 @@ export default function Header() {
             </AppBar>
             <Dialog open={open} onClose={handleClose}>
                 <DialogContent>
-                    <DialogContentText>
-                        <Register />
-                    </DialogContentText>
+                    <IconButton sx={{ position: 'absolute', top: 10, right: 10 }} onClick={handleClose}>
+                        <Close />
+                    </IconButton>
+                    {mode === MODE.REGISTER && (
+                        <>
+                            <Register closeDialog={handleClose} />
+
+                            <Box textAlign="center">
+                                <Button color="primary" onClick={() => setMode(MODE.LOGIN)}>Already have an account. Login here</Button>
+                            </Box>
+                        </>
+                    )}
+                    {mode === MODE.LOGIN && (
+                        <>
+                            <Login closeDialog={handleClose} />
+
+                            <Box textAlign="center">
+                                <Button color="primary" onClick={() => setMode(MODE.REGISTER)}>Dont hav an account. Register Now</Button>
+                            </Box>
+                        </>
+                    )}
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                </DialogActions>
             </Dialog>
-        </Box>
+        </Box >
     );
 }

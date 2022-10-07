@@ -7,24 +7,17 @@ import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import * as yup from "yup";
 
-RegisterForm.propTypes = {
+LoginForm.propTypes = {
     onSubmit: PropTypes.func,
 };
 
-RegisterForm.defaultProps = {
+LoginForm.defaultProps = {
     onSubmit: null
-}
+};
 
-function RegisterForm(props) {
+function LoginForm(props) {
     const schema = yup.object({
-        fullName: yup
-            .string()
-            .required('Please enter full name')
-            .test('should has at least two words', 'Please enter at least two words', (value) => {
-                return value.split(' ').length >= 2;
-            })
-        ,
-        email: yup
+        identifier: yup
             .string()
             .required("Please enter your email")
             .email("Please enter a valid email address")
@@ -32,26 +25,15 @@ function RegisterForm(props) {
         password: yup
             .string()
             .required("Please enter password")
-            .min(6)
-        // .matches(
-        //     /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-        //     "Password must contain at least 8 characters, one uppercase, one number and one special case character"
-        // )
         ,
-        retypePassword: yup
-            .string()
-            .required("Please confirm your password")
-            .oneOf([yup.ref('password'), null], "Passwords don't match.")
 
     }).required();
 
     const { control, reset, handleSubmit, formState } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
-            fullName: '',
-            email: '',
-            password: '',
-            retypePassword: ''
+            identifier: '',
+            password: ''
         }
     });
 
@@ -74,16 +56,14 @@ function RegisterForm(props) {
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                 <LockOutlined></LockOutlined>
             </Avatar>
-            <Typography className='typography' component="h3" variant="h5" sx={{ textAlign: 'center' }}>Create An Account</Typography>
+            <Typography className='typography' component="h3" variant="h5" sx={{ textAlign: 'center' }}>Log in</Typography>
             <form onSubmit={handleSubmit(handleOnSubmit)}>
-                <InputField name="fullName" control={control} label="Full name" disabled={false} formState={formState} />
-                <InputField name="email" control={control} label="Email" disabled={false} formState={formState} />
+                <InputField name="identifier" control={control} label="Email" disabled={false} formState={formState} />
                 <PasswordField name="password" control={control} label="Password" disabled={false} formState={formState} />
-                <PasswordField name="retypePassword" control={control} label="Retype Password" disabled={false} formState={formState} />
-                <Button size="large" disabled={isSubmitting} type="submit" fullWidth variant="contained" sx={{ mt: 2, mb: 2 }}>Create An Account</Button>
+                <Button size="large" disabled={isSubmitting} type="submit" fullWidth variant="contained" sx={{ mt: 2, mb: 2 }}>Sign In</Button>
             </form>
         </Box>
     );
 }
 
-export default RegisterForm;
+export default LoginForm;
