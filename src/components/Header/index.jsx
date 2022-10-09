@@ -1,20 +1,19 @@
+import { AccountCircle, Close } from '@mui/icons-material';
 import CodeIcon from '@mui/icons-material/Code';
-import { IconButton, Typography } from '@mui/material';
+import { IconButton, Menu, MenuItem, Typography } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Toolbar from '@mui/material/Toolbar';
-import { NavLink } from "react-router-dom";
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import './style.sass';
-import { useState } from 'react';
-import Register from 'features/Auth/Register';
-import { AddBox, Close } from '@mui/icons-material';
+import Toolbar from '@mui/material/Toolbar';
 import Login from 'features/Auth/Login';
+import Register from 'features/Auth/Register';
+import { logout } from 'features/Auth/userSlice';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from "react-router-dom";
+import './style.sass';
 
 const MODE = {
     'LOGIN': 'login',
@@ -22,9 +21,12 @@ const MODE = {
 }
 
 export default function Header() {
+    const dispatch = useDispatch();
+    const loggedInUser = useSelector(state => state.user.current);
+    const isUserLoggedIn = !!loggedInUser.id;
     const [open, setOpen] = useState(false);
-
-    const [mode, setMode] = useState(MODE.REGISTER);
+    const [mode, setMode] = useState(MODE.LOGIN);
+    const [anchorEl, setAnchorEl] = useState(null);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -35,6 +37,20 @@ export default function Header() {
             setOpen(false);
         }
     };
+
+    const handleUserClick = (e) => {
+        setAnchorEl(e.currentTarget);
+    };
+
+    const handleLogOutClick = () => {
+        const action = logout();
+        dispatch(action);
+    }
+
+    const handleCloseMenu = () => {
+        setAnchorEl(null);
+    }
+
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -57,8 +73,29 @@ export default function Header() {
                     <NavLink to="/tools" className="MenuItem">
                         <Button color="inherit">Tools</Button>
                     </NavLink>
-
-                    <Button color="inherit" onClick={handleClickOpen}>Register</Button>
+                    {!isUserLoggedIn && (
+                        <>
+                            <Button color="inherit" onClick={handleClickOpen}>Login</Button>
+                        </>
+                    )}
+                    {isUserLoggedIn && (
+                        <>
+                            <IconButton color="inherit" onClick={handleUserClick}>
+                                <AccountCircle></AccountCircle>
+                            </IconButton>
+                            <Menu
+                                anchorEl={anchorEl}
+                                open={Boolean(anchorEl)}
+                                onClose={handleCloseMenu}
+                                MenuListProps={{
+                                    'aria-labelledby': 'basic-button',
+                                }}
+                            >
+                                <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
+                                <MenuItem onClick={handleLogOutClick}>Logout</MenuItem>
+                            </Menu>
+                        </>
+                    )}
                 </Toolbar>
             </AppBar>
             <Dialog open={open} onClose={handleClose}>
