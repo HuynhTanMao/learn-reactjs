@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import './style.sass';
+import { Container } from '@mui/system';
 
 PostFiltersForm.propTypes = {
     onSubmit: PropTypes.func,
@@ -32,14 +33,16 @@ function PostFiltersForm(props) {
         }, 300);
     }
     return (
-        <div>
+        <Container sx={{
+            marginBottom: 6
+        }}>
             <form>
                 <fieldset>
                     <legend>Search:</legend>
                     <input type="text" onChange={handleSearchTermChange} value={searchTerm} placeholder="Enter your keyword" />
                 </fieldset>
             </form>
-        </div>
+        </Container>
     );
 }
 

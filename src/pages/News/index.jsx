@@ -1,25 +1,24 @@
 import * as queryString from "query-string";
-import React, { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import Pagination from "../../features/Pagination";
 import PostFiltersForm from "../../features/PostFiltersForm";
 import PostList from "../../features/PostList";
 
 
 function News() {
-
     const [postList, setPostList] = useState([]);
     const [pagination, setPagination] = useState({
         _page: 1,
-        _limit: 10,
+        _limit: 6,
         _totalRows: 1,
     });
 
-    let [searchParams] = useSearchParams();
+    let [searchParams, setSearchParams] = useSearchParams();
 
     const [filters, setFilters] = useState({
-        _limit: 10,
-        _page: 1,
+        _page: searchParams.get("_page") || 1,
+        _limit: searchParams.get("_limit") || 6
     });
 
     useEffect(() => {
@@ -46,22 +45,29 @@ function News() {
             ...filters,
             _page: page,
         });
+        setSearchParams({
+            ...filters,
+            _page: page,
+        });
     }
 
     const HandleFiltersChange = (newFilters) => {
-        let navigate = useNavigate();
         setFilters({
             ...filters,
             _page: 1,
             title_like: newFilters.searchTerm
-        })
-        navigate('/news' + queryString.stringify(filters));
+        });
+        setSearchParams({
+            ...filters,
+            _page: 1,
+            title_like: newFilters.searchTerm
+        });
     }
 
     return (
         <div className="news">
             <div className="container">
-                <h1>React custom hook - <br /> Magicbox random color after 1 second</h1>
+                <h1>List Post</h1>
                 <PostFiltersForm onSubmit={HandleFiltersChange} />
                 <PostList posts={postList} />
                 <Pagination pagination={pagination} onPageChange={HandleOnPageChange} />

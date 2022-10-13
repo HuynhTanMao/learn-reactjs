@@ -1,5 +1,6 @@
-import { Container } from "@mui/material";
+import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import productApi from "api/productApi";
+import Products from "pages/Products";
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import './App.css';
@@ -11,39 +12,37 @@ import Todos from './pages/Todos';
 import Tools from './pages/Tools';
 import Tool from './pages/Tools/Tool.jsx';
 
+const theme = createTheme({
+  palette: {
+    background: {
+      default: "#f6f6f6"
+    }
+  }
+});
+
 function App() {
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const params = {
-        _limit: 10
-      }
-      const productList = await productApi.getAll(params);
-      console.log(productList);
-    };
-
-    fetchProducts();
-
-  }, []);
-
   return (
     <div className="App">
-      <Container fixed>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
         {<Header />}
         <div className="page-wrap">
-          <Routes>
-            <Route index path='/' element={<HomePage />} />
-            <Route path='/tools'>
-              <Route index element={<Tools />} />
-              <Route path=":toolSlug" element={<Tool />} />
-            </Route>
-            <Route path='/todos' element={<Todos />} />
-            <Route path='/news' element={<News />} />
-            <Route path="*" element={<NoMatch />} />
-          </Routes>
+          <Container>
+            <Routes>
+              <Route index path='/' element={<HomePage />} />
+              <Route path='/tools'>
+                <Route index element={<Tools />} />
+                <Route path=":toolSlug" element={<Tool />} />
+              </Route>
+              <Route path='/todos' element={<Todos />} />
+              <Route path='/news' element={<News />} />
+              <Route path='/products' element={<Products />} />
+              <Route path="*" element={<NoMatch />} />
+            </Routes>
+          </Container>
         </div>
         {<Footer />}
-      </Container>
+      </ThemeProvider>
     </div>
   );
 }

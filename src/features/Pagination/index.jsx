@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './style.sass';
+import { Container } from '@mui/material';
 
 Pagination.propTypes = {
     pagination: PropTypes.object.isRequired,
@@ -22,7 +23,9 @@ function Pagination(props) {
     }
 
     return (
-        <div>
+        <Container sx={{
+            marginTop: 6
+        }}>
             <button
                 disabled={_page <= 1}
                 onClick={() => { handlePageChange(_page - 1) }}
@@ -35,7 +38,7 @@ function Pagination(props) {
             >
                 Next
             </button>
-        </div>
+        </Container>
     );
 }
 

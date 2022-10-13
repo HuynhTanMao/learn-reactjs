@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Toolbar from '@mui/material/Toolbar';
+import { Container } from '@mui/system';
 import Login from 'features/Auth/Login';
 import Register from 'features/Auth/Register';
 import { logout } from 'features/Auth/userSlice';
@@ -55,48 +56,53 @@ export default function Header() {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
-                <Toolbar>
-                    <CodeIcon sx={{ mr: 1 }}></CodeIcon>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        TM DEV
-                    </Typography>
+                <Container>
+                    <Toolbar disableGutters>
+                        <CodeIcon sx={{ mr: 1 }}></CodeIcon>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                            TM DEV
+                        </Typography>
 
-                    <NavLink to="/" className="MenuItem">
-                        <Button color="inherit">Home</Button>
-                    </NavLink>
-                    <NavLink to="/todos" className="MenuItem">
-                        <Button color="inherit">Todo</Button>
-                    </NavLink >
-                    <NavLink to="/news" className="MenuItem">
-                        <Button color="inherit">Post List</Button>
-                    </NavLink >
-                    <NavLink to="/tools" className="MenuItem">
-                        <Button color="inherit">Tools</Button>
-                    </NavLink>
-                    {!isUserLoggedIn && (
-                        <>
-                            <Button color="inherit" onClick={handleClickOpen}>Login</Button>
-                        </>
-                    )}
-                    {isUserLoggedIn && (
-                        <>
-                            <IconButton color="inherit" onClick={handleUserClick}>
-                                <AccountCircle></AccountCircle>
-                            </IconButton>
-                            <Menu
-                                anchorEl={anchorEl}
-                                open={Boolean(anchorEl)}
-                                onClose={handleCloseMenu}
-                                MenuListProps={{
-                                    'aria-labelledby': 'basic-button',
-                                }}
-                            >
-                                <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
-                                <MenuItem onClick={handleLogOutClick}>Logout</MenuItem>
-                            </Menu>
-                        </>
-                    )}
-                </Toolbar>
+                        <NavLink to="/" className="MenuItem">
+                            <Button color="inherit">Home</Button>
+                        </NavLink>
+                        <NavLink to="/todos" className="MenuItem">
+                            <Button color="inherit">Todo</Button>
+                        </NavLink >
+                        <NavLink to="/news" className="MenuItem">
+                            <Button color="inherit">Post List</Button>
+                        </NavLink >
+                        <NavLink to="/products" className="MenuItem">
+                            <Button color="inherit">Products</Button>
+                        </NavLink >
+                        <NavLink to="/tools" className="MenuItem">
+                            <Button color="inherit">Tools</Button>
+                        </NavLink>
+                        {!isUserLoggedIn && (
+                            <>
+                                <Button color="inherit" onClick={handleClickOpen}>Login</Button>
+                            </>
+                        )}
+                        {isUserLoggedIn && (
+                            <>
+                                <IconButton color="inherit" onClick={handleUserClick}>
+                                    <AccountCircle></AccountCircle>
+                                </IconButton>
+                                <Menu
+                                    anchorEl={anchorEl}
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleCloseMenu}
+                                    MenuListProps={{
+                                        'aria-labelledby': 'basic-button',
+                                    }}
+                                >
+                                    <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
+                                    <MenuItem onClick={handleLogOutClick}>Logout</MenuItem>
+                                </Menu>
+                            </>
+                        )}
+                    </Toolbar>
+                </Container>
             </AppBar>
             <Dialog open={open} onClose={handleClose}>
                 <DialogContent>
