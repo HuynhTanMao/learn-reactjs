@@ -7,9 +7,9 @@ Products.propTypes = {
 
 function Products(props) {
     return (
-        <div>
+        <>
             <ListPage />
-        </div>
+        </>
     );
 }
 

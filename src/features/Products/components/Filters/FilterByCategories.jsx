@@ -8,8 +8,8 @@ FilterByCategories.propTypes = {
 
 function FilterByCategories({ categories, onFilter }) {
 
-    const handleClickCategory = (catId) => {
-        if (onFilter) onFilter({ category: catId });
+    const handleClickCategory = (cat) => {
+        if (onFilter) onFilter({ category: cat.id, categoryName: cat.name });
     }
 
     return (
@@ -17,7 +17,7 @@ function FilterByCategories({ categories, onFilter }) {
             <Typography variant='h3' fontSize={14} fontWeight={700}>Danh Mục Sản Phẩm</Typography>
             <ul>
                 {categories.map(cat => (
-                    <li key={cat.id} onClick={() => handleClickCategory(cat.id)} >{cat.name}</li>
+                    <li key={cat.id} onClick={() => handleClickCategory(cat)} >{cat.name}</li>
                 ))}
             </ul>
         </Box >

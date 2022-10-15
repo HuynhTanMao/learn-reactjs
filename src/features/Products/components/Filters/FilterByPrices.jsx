@@ -22,7 +22,17 @@ function FilterByPrices({ onFilter }) {
     }
 
     const handleClick = (e) => {
-        if (onFilter) onFilter(priceFilter);
+        if (!onFilter) return;
+
+        if (priceFilter.salePrice_lte === 0 && priceFilter.salePrice_gte === 0) return;
+
+        if (priceFilter.salePrice_lte === 0) {
+            priceFilter.salePrice_lte = priceFilter.salePrice_gte;
+            priceFilter.salePrice_gte = 0;
+        }
+
+        onFilter(priceFilter);
+
         setPriceFilter({
             salePrice_gte: 0,
             salePrice_lte: 0,

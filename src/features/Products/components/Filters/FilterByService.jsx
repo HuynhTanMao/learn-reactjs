@@ -1,17 +1,24 @@
 import { Box, Checkbox, FormControlLabel, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 FilterByService.propTypes = {
+    filters: PropTypes.object,
     onFilter: PropTypes.func,
 };
 
-function FilterByService({ onFilter }) {
-
+function FilterByService({ filters = {}, onFilter = null }) {
     const [values, setValues] = useState({
         isFreeShip: false,
         isPromotion: false,
     })
+
+    useEffect(() => {
+        setValues({
+            isFreeShip: filters.isFreeShip,
+            isPromotion: filters.isPromotion,
+        })
+    }, [filters])
 
     const handleChange = (event) => {
 

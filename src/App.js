@@ -1,7 +1,6 @@
 import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import productApi from "api/productApi";
 import Products from "pages/Products";
-import { useEffect } from "react";
+import ProductDetail from "pages/Products/ProductDetail";
 import { Route, Routes } from "react-router-dom";
 import './App.css';
 import Footer from './components/Footer';
@@ -36,7 +35,10 @@ function App() {
               </Route>
               <Route path='/todos' element={<Todos />} />
               <Route path='/news' element={<News />} />
-              <Route path='/products' element={<Products />} />
+              <Route path='/products'>
+                <Route index element={<Products />} />
+                <Route path=":productId" element={<ProductDetail />} />
+              </Route>
               <Route path="*" element={<NoMatch />} />
             </Routes>
           </Container>

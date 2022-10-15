@@ -7,10 +7,11 @@ import FilterByPrices from './Filters/FilterByPrices';
 import FilterByService from './Filters/FilterByService';
 
 ProductFilters.propTypes = {
+    filters: PropTypes.object,
     onChange: PropTypes.func,
 };
 
-function ProductFilters({ onChange }) {
+function ProductFilters({ filters = {}, onChange = null }) {
 
     const [listCategory, setListCategory] = useState([]);
 
@@ -35,7 +36,7 @@ function ProductFilters({ onChange }) {
         <Box>
             <FilterByCategories categories={listCategory} onFilter={handFilter} />
             <FilterByPrices onFilter={handFilter} />
-            <FilterByService onFilter={handFilter} />
+            <FilterByService filters={filters} onFilter={handFilter} />
         </Box>
     );
 }
