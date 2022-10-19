@@ -35,9 +35,9 @@ function App() {
               </Route>
               <Route path='/todos' element={<Todos />} />
               <Route path='/news' element={<News />} />
-              <Route path='/products'>
+              <Route path='/products' >
                 <Route index element={<Products />} />
-                <Route path=":productId" element={<ProductDetail />} />
+                <Route path=":productId/*" element={<ProductDetail />} />
               </Route>
               <Route path="*" element={<NoMatch />} />
             </Routes>

@@ -100,6 +100,7 @@ function ListPage(props) {
         setSearchParams(newFilter);
     }
 
+
     return (
         <Box sx={{ flexGrow: 1, paddingTop: 5, paddingBottom: 5 }}>
             <Grid container spacing={2}>

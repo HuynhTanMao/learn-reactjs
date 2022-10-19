@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import PropTypes from 'prop-types';
+import { Outlet } from 'react-router-dom';
 import Product from './Product';
 
 ProductList.propTypes = {
@@ -23,6 +24,7 @@ function ProductList({ data }) {
                     ))
                 }
             </Grid>
+            <Outlet />
         </Box>
     );
 }
