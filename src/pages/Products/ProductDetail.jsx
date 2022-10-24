@@ -1,4 +1,5 @@
 import { Box, Grid, Paper } from '@mui/material';
+import { addToCart, showMiniCart } from 'features/Cart/cartSlice';
 import AddToCartForm from 'features/Products/components/AddToCartForm';
 import ProductAdditional from 'features/Products/components/ProductAdditional';
 import ProductDescription from 'features/Products/components/ProductDescription';
@@ -7,19 +8,34 @@ import ProductInfoMenu from 'features/Products/components/ProductInfoMenu';
 import ProductReviews from 'features/Products/components/ProductReviews';
 import ProductThumbnail from 'features/Products/components/ProductThumbnail';
 import useProductDetail from 'features/Products/hooks/useProductDetail';
+import { useDispatch } from 'react-redux';
 import { Outlet, Route, Router, Routes, useParams } from 'react-router-dom';
 
 
 
 function ProductDetail() {
+    const dispatch = useDispatch();
     const { productId } = useParams();
     const { product, loading } = useProductDetail(productId);
     if (loading) {
         return <Box>Loading...</Box>
     }
 
-    const handleAddToCartForm = (formValues) => {
-        console.log('Form values: ', formValues);
+    const handleAddToCartForm = ({ quantity }) => {
+
+        const cartItem = {
+            id: productId,
+            product: {
+                name: product.name,
+                salePrice: product.salePrice
+            },
+            quantity
+        }
+
+        const actionAddToCart = addToCart(cartItem);
+        dispatch(actionAddToCart);
+
+        dispatch(showMiniCart());
     }
 
     return (

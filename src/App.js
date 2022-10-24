@@ -1,4 +1,5 @@
 import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import CartFeature from "pages/Cart";
 import Products from "pages/Products";
 import ProductDetail from "pages/Products/ProductDetail";
 import { Route, Routes } from "react-router-dom";
@@ -39,6 +40,7 @@ function App() {
                 <Route index element={<Products />} />
                 <Route path=":productId/*" element={<ProductDetail />} />
               </Route>
+              <Route path='/cart' element={<CartFeature />} />
               <Route path="*" element={<NoMatch />} />
             </Routes>
           </Container>

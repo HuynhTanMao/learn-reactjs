@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '@mui/material';
 import { Box } from '@mui/system';
+import productApi from 'api/productApi';
 import QuantityField from 'components/form-controls/QuantityField';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
@@ -32,7 +33,6 @@ function AddToCartForm({ onSubmit = null }) {
     const handleOnSubmit = (data) => {
 
         if (!onSubmit) return;
-
         onSubmit(data);
 
         reset();
